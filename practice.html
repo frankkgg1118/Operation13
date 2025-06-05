@@ -1,0 +1,64 @@
+<body>
+    <div style="text-align:center;">
+        <button id="totalBtn">購物車總額</button>
+        <button id="clearBtn">清空購物車</button>
+    </div>
+
+    <div style="margin-top:20px; text-align:center;">
+        <img src="https://s.yimg.com/ut/api/res/1.2/.erON1ewq62b7GR1qzV2hQ--~B/YXBwaWQ9eXR3bWFsbDtjYz0zMTUzNjAwMDtoPTYwMDtxPTEwMDt3PTYwMA--/https://s.yimg.com/fy/1c9f/item/p0704264037808-item-63dfxf4x0600x0600-m.jpg" style="width:150px; display:block; margin:0 auto;">
+        <div style="margin-top:6px;">
+            <span style="font-size:18px;">$23</span>
+            <button class="addCartBtn" data-price="23" style="margin-left:10px;">加入購物車</button>
+        </div>
+    </div>
+
+    <div style="height:30px;"></div>
+    
+    <div style="text-align:center;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcQOFgRRg3-tlKs254K0uowknb32AZYuIzaQ&s" style="width:150px; display:block; margin:0 auto;">
+        <div style="margin-top:6px;">
+            <span style="font-size:18px;">$28</span>
+            <button class="addCartBtn" data-price="28" style="margin-left:10px;">加入購物車</button>
+        </div>
+    </div>
+
+   
+
+    <script>
+        let cartTotal = 0;
+
+        if(localStorage.getItem("cartTotal")) {
+            cartTotal = Number(localStorage.getItem("cartTotal"));
+        }
+
+       
+
+        function logTotal() {
+            console.log("購物車金額：" + cartTotal);
+        }
+
+        function saveTotal() {
+            localStorage.setItem("cartTotal", cartTotal);
+        }
+
+        document.querySelectorAll('.addCartBtn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const price = Number(this.getAttribute('data-price'));
+                cartTotal += price;
+                logTotal();
+                saveTotal();
+                
+            });
+        });
+
+        document.getElementById('totalBtn').addEventListener('click', () => {
+            alert('購物車金額：$' + cartTotal);
+        });
+
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            cartTotal = 0;
+            saveTotal();
+           
+        });
+    </script>
+</body>
